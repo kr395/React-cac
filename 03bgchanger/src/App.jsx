@@ -24,7 +24,7 @@ function App() {
   ];
 
 
-
+  
   return (
     <>
      <ColorButtons colors= {collors}/>
