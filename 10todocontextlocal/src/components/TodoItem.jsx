@@ -1,13 +1,14 @@
 import React from "react";
-import { useTodoContext } from "../context/TodoContext";
+import { useTodoContext } from "../context/index";
+import { useState } from "react";
 
 function TodoItem({ todo }) {
-  const [isTodoEditable, setIsTodoEditable] = React.useState(false);
-  const [todoMsg, setTodoMsg] = React.useState(todo.todo);
+  const [isTodoEditable, setIsTodoEditable] = useState(false);
+  const [todoMsg, setTodoMsg] = useState(todo.todo);
   const {deleteTodo, updateTodo, toggleComplete} = useTodoContext();
 
   const editTodo = () => {
-    updateTodo({...todo, todo: todoMsg});
+    updateTodo(todo.id,{...todo, todo: todoMsg});
     setIsTodoEditable(false);
   };
 
@@ -22,7 +23,7 @@ function TodoItem({ todo }) {
         todo.completed ? "bg-[#c6e9a7]" : "bg-[#ccbed7]"
       }`}
     >
-      <input
+      <input 
         type="checkbox"
         className="cursor-pointer"
         checked={todo.completed}
