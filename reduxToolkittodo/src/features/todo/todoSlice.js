@@ -6,26 +6,26 @@ const initialState = {
       id: 1,
       text: "Todo msg",
     },
-  ],
+  ],    
 };
 
 export const todoSlice = createSlice({
-  name: "todos",
+  name: "todo",
   initialState,
   reducers: {
     addTodo: (state, action) => {
       const todo = {
         id: nanoid(),
-        text: action.payload.text,
+        text: action.payload,
       };
       state.todos.push(todo);
     },
     removeTodo: (state, action) => {
-      state.todos = state.todos.filter((todo) => todo.id !== action.payload.id);
+      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
   },
 });
 
-export const {addTodo, removeTodo} = todoSlice.actions;
+export const { addTodo, removeTodo } = todoSlice.actions;
 
-export default todoSlice.reducer; 
+export default todoSlice.reducer;
