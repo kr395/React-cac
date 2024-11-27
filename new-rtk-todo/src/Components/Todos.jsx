@@ -1,10 +1,18 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeTodo } from "../features/todo/todoSlice";
+import { removeTodo, updateTodo } from "../features/todo/todoSlice";
 
 const Todos = () => {
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
+
+  const handleUpdateTodo = (id) => {
+    const newTodoText = prompt("Enter the new todo text:");
+    if (newTodoText) {
+      dispatch(updateTodo({ id, text: newTodoText }));
+    }
+  };
+
 
   return (
     <>
@@ -20,6 +28,11 @@ const Todos = () => {
               onClick={() => dispatch(removeTodo(todo.id))}
               className="text-white bg-green-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
             > ❌
+            </button>
+            <button
+              onClick={() => handleUpdateTodo(todo.id)}
+              className="text-white bg-green-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
+            > ✏️
             </button>
           </li>
         ))}
